@@ -11,17 +11,17 @@ N=1;            % Number of repeating lamina
 M=1;            % Number of material systems
 
 % Layers 25/50/25, 33/67/0
-sym=1;          % Is there sym?
+sym=1;          % Is there symmetry? 0-no, 1-yes
 t=[0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15];    % Stacking order - thickness (in mm)
 a=[45,90,-45,0,45,90,-45,0,45,90,-45,0];    % Stacking order - Angle (in degrees)
-%a=[60,-60,60,0,0,-60,60,0,-60,60,-60,0];     % Stacking order - Angle (in degrees)
-e=[1,1,1,1,1,1,1,1,1,1];    % Stacking order - Material
+e=[1,1,1,1,1,1,1,1,1,1];    % Stacking order - Material type
 
  
 a=a*pi/180; % angle deg to radian
 T=sum(t)*N*2^(sym);       % Total thickness
 
 % MATERIAL INFORMATION
+% Add material property as matrix value if more than one material is being used.
 E1=[22.86e6];
 E2=[1.302e6];
 v12=[0.32];
@@ -58,7 +58,7 @@ for j=1:1:length(t)*N
     
 end
 
-% IMPLEMENTATION OF SYM
+% IMPLEMENTATION OF SYMMETRY
 if sym==1
     for j=1:1:length(t)*N
         L(length(t)*N+j)=L(length(t)*N-j+1);
